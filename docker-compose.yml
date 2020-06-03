@@ -1,0 +1,26 @@
+version : '3'
+services: 
+    dockerreact: #name can be anything
+        stdin_open: true
+        build :
+            context : .
+            dockerfile: Dockerfile.dev
+        ports: 
+            - "3000:3000"
+        volumes: 
+            - /app/node_modules #this is basically to tell the container not to map it as a reference to anything up against the local folder files
+            - .:/app #maps the current folder outside the container to the folders inside the container
+    
+    tests:
+        build : 
+            context : .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules
+            - .:/app
+        command: ["npm","run","test"]
+        
+            
+
+            
+            
