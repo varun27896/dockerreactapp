@@ -1,7 +1,8 @@
+language: generic
 sudo: required
 services:
     - docker 
 before_install:
     - docker build -t varunchillara/dockerreactapp -f Dockerfile.dev .
 script:
-    - docker run varunchillara/dockerreactapp npm run test -- --coverage
+    - docker run -e CI=true varunchillara/dockerreactapp npm run test 
